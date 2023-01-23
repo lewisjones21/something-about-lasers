@@ -40,10 +40,10 @@ public class DefenceController : LevelController {
     {
         base.Start();
         ui = GameObject.Find("Defence UI");
-        boxList = ui.transform.FindChild("Box List").gameObject;
-        waveText = ui.transform.FindChild("Wave Panel").FindChild("Wave Text").GetComponent<Text>();
-        painPanel = ui.transform.FindChild("Pain Panel").GetComponent<Image>();
-        painText = painPanel.transform.FindChild("Pain Text").GetComponent<Text>();
+        boxList = ui.transform.Find("Box List").gameObject;
+        waveText = ui.transform.Find("Wave Panel").Find("Wave Text").GetComponent<Text>();
+        painPanel = ui.transform.Find("Pain Panel").GetComponent<Image>();
+        painText = painPanel.transform.Find("Pain Text").GetComponent<Text>();
         painMessages = new string[] {
             "Ow!",
             "Ow!",
@@ -65,20 +65,20 @@ public class DefenceController : LevelController {
             {
                 curButton = (GameObject)Instantiate(boxButton);
                 curButton.transform.SetParent(boxList.transform, false);
-                curButton.transform.FindChild("Button").GetChild(0).GetComponent<Text>().text//(Add spaces before non-first capital letters)
+                curButton.transform.Find("Button").GetChild(0).GetComponent<Text>().text//(Add spaces before non-first capital letters)
                     = ((Global.BoxType)n).ToString()[0]
                     + System.Text.RegularExpressions.Regex.Replace(((Global.BoxType)n).ToString().Remove(0, 1), "[A-Z]", " $&");
                 curButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, curY);
                 //curButton.GetComponent<Button>().onClick.AddListener(new UnityEngine.Events.UnityAction())
                 int index = n;
                 curButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => BoxButtonPressed(index));
-                availableTexts[n] = curButton.transform.FindChild("Text").GetComponent<Text>();
+                availableTexts[n] = curButton.transform.Find("Text").GetComponent<Text>();
                 availableTexts[n].text = placementCosts[n].ToString();
                 //Set colour-coding of this button
-                ColorBlock colourBlock =  curButton.transform.FindChild("Button").GetComponent<Button>().colors;
+                ColorBlock colourBlock =  curButton.transform.Find("Button").GetComponent<Button>().colors;
                 colourBlock.normalColor = Color.Lerp(
-                    gc.placementBoxes[n].transform.FindChild("Body").GetComponent<MeshRenderer>().sharedMaterial.color, Color.white, 0.5f);
-                curButton.transform.FindChild("Button").GetComponent<Button>().colors = colourBlock;
+                    gc.placementBoxes[n].transform.Find("Body").GetComponent<MeshRenderer>().sharedMaterial.color, Color.white, 0.5f);
+                curButton.transform.Find("Button").GetComponent<Button>().colors = colourBlock;
 
                 totalAvailable++;
                 curY -= 37.5f;
@@ -104,12 +104,12 @@ public class DefenceController : LevelController {
             gc.SetPlacementType(Global.BoxType.None);
         }
 
-        ui.transform.FindChild("Objective Panel").FindChild("Objective Text").GetComponent<Text>().text
+        ui.transform.Find("Objective Panel").Find("Objective Text").GetComponent<Text>().text
             = Application.loadedLevelName + " - " + objective;
-        selectionPanel = boxList.transform.FindChild("Selection Panel").GetComponent<RectTransform>();
+        selectionPanel = boxList.transform.Find("Selection Panel").GetComponent<RectTransform>();
 
-        moneyText = boxList.transform.FindChild("Money Text").GetComponent<Text>();
-        healthText = boxList.transform.FindChild("Health Text").GetComponent<Text>();
+        moneyText = boxList.transform.Find("Money Text").GetComponent<Text>();
+        healthText = boxList.transform.Find("Health Text").GetComponent<Text>();
         health = maxHealth;
 
         wavesUntilBoss = averageBossWaveSeparation + Random.Range(-2, 2);

@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour {
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         dc = GameObject.FindGameObjectWithTag("GameController").GetComponent<DefenceController>();
-        healthBox = transform.FindChild("Health Box").gameObject;
+        healthBox = transform.Find("Health Box").gameObject;
         psDamage = GetComponentInChildren<ParticleSystem>();
 
         GetComponentInChildren<Animator>().speed = speed * 1.25f / transform.localScale.x;

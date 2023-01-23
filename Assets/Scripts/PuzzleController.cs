@@ -35,9 +35,9 @@ public class PuzzleController : LevelController {
         base.Start();
         proceeding = false;
         ui = GameObject.Find("Puzzle UI");
-        boxList = ui.transform.FindChild("Box List").gameObject;
-        winPanel = ui.transform.FindChild("Win Panel").GetComponent<Image>();
-        winText = winPanel.transform.FindChild("Win Text").GetComponent<Text>();
+        boxList = ui.transform.Find("Box List").gameObject;
+        winPanel = ui.transform.Find("Win Panel").GetComponent<Image>();
+        winText = winPanel.transform.Find("Win Text").GetComponent<Text>();
         winMessages = new string[] {
             "Woo!",
             "Wahey!",
@@ -57,20 +57,20 @@ public class PuzzleController : LevelController {
             {
                 curButton = (GameObject)Instantiate(boxButton);
                 curButton.transform.SetParent(boxList.transform, false);
-                curButton.transform.FindChild("Button").GetChild(0).GetComponent<Text>().text//(Add spaces before non-first capital letters)
+                curButton.transform.Find("Button").GetChild(0).GetComponent<Text>().text//(Add spaces before non-first capital letters)
                     = ((Global.BoxType)n).ToString()[0]
                     + System.Text.RegularExpressions.Regex.Replace(((Global.BoxType)n).ToString().Remove(0, 1), "[A-Z]", " $&");
                 curButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, curY);
                 //curButton.GetComponent<Button>().onClick.AddListener(new UnityEngine.Events.UnityAction())
                 int index = n;
                 curButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => BoxButtonPressed(index));
-                availableTexts[n] = curButton.transform.FindChild("Text").GetComponent<Text>();
+                availableTexts[n] = curButton.transform.Find("Text").GetComponent<Text>();
                 availableTexts[n].text = placementAvailable[n].ToString();
                 //Set colour-coding of this button
-                ColorBlock colourBlock =  curButton.transform.FindChild("Button").GetComponent<Button>().colors;
+                ColorBlock colourBlock =  curButton.transform.Find("Button").GetComponent<Button>().colors;
                 colourBlock.normalColor = Color.Lerp(
-                    gc.placementBoxes[n].transform.FindChild("Body").GetComponent<MeshRenderer>().sharedMaterial.color, Color.white, 0.5f);
-                curButton.transform.FindChild("Button").GetComponent<Button>().colors = colourBlock;
+                    gc.placementBoxes[n].transform.Find("Body").GetComponent<MeshRenderer>().sharedMaterial.color, Color.white, 0.5f);
+                curButton.transform.Find("Button").GetComponent<Button>().colors = colourBlock;
 
                 totalAvailable++;
                 curY -= 37.5f;
@@ -96,9 +96,9 @@ public class PuzzleController : LevelController {
             gc.SetPlacementType(Global.BoxType.None);
         }
 
-        ui.transform.FindChild("Objective Panel").FindChild("Objective Text").GetComponent<Text>().text
+        ui.transform.Find("Objective Panel").Find("Objective Text").GetComponent<Text>().text
             = Application.loadedLevelName + " - " + objective;
-        selectionPanel = boxList.transform.FindChild("Selection Panel").GetComponent<RectTransform>();
+        selectionPanel = boxList.transform.Find("Selection Panel").GetComponent<RectTransform>();
 	}
 	
 	// Update is called once per frame

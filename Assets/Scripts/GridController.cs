@@ -111,7 +111,7 @@ public class GridController : MonoBehaviour
 					}
 					if (type == Global.BoxType.Button || type == Global.BoxType.WalkwayButton)
 					{
-						boxes[(int)position.x, (int)position.y].transform.FindChild("Button").GetComponent<MeshRenderer>().material
+						boxes[(int)position.x, (int)position.y].transform.Find("Button").GetComponent<MeshRenderer>().material
 							= materialOff;
 					}
 				}
@@ -307,7 +307,7 @@ public class GridController : MonoBehaviour
 					if (types[x, y] == Global.BoxType.PowerMeter)
 					{
 						float inputPower = GetInputPower(x, y, Direction.Left);
-						boxes[x, y].transform.FindChild("Screen").GetChild(0).GetComponent<TextMesh>().text
+						boxes[x, y].transform.Find("Screen").GetChild(0).GetComponent<TextMesh>().text
 							= inputPower.ToString("0.##");//.Remove(5);
 					}
 				}
@@ -607,11 +607,11 @@ public class GridController : MonoBehaviour
 					//Set the appropriate texture
 					if (isOn[x, y])
 					{
-						boxes[x, y].transform.FindChild("Button").GetComponent<MeshRenderer>().material = materialOn;
+						boxes[x, y].transform.Find("Button").GetComponent<MeshRenderer>().material = materialOn;
 					}
 					else
 					{
-						boxes[x, y].transform.FindChild("Button").GetComponent<MeshRenderer>().material = materialOff;
+						boxes[x, y].transform.Find("Button").GetComponent<MeshRenderer>().material = materialOff;
 					}
 				}
 			}
@@ -925,7 +925,7 @@ public class GridController : MonoBehaviour
 				boxes[x, y].transform.localScale = Vector3.one * cellSize;
 				if (type == Global.BoxType.Button || type == Global.BoxType.WalkwayButton)
 				{
-					boxes[x, y].transform.FindChild("Button").GetComponent<MeshRenderer>().material
+					boxes[x, y].transform.Find("Button").GetComponent<MeshRenderer>().material
 						= materialOff;
 				}
 				if (!fixedPlacement)
@@ -964,7 +964,7 @@ public class GridController : MonoBehaviour
 					boxes[x, y].transform.rotation = Quaternion.LookRotation(Vector3FromDirection(directions[x, y]));
 					if (types[x, y] == Global.BoxType.PowerMeter)
 					{
-						boxes[x, y].transform.FindChild("Screen").transform.rotation = Quaternion.Euler(315.0f, 0.0f, 0.0f);
+						boxes[x, y].transform.Find("Screen").transform.rotation = Quaternion.Euler(315.0f, 0.0f, 0.0f);
 					}
 				}
 				upToDate = false;
